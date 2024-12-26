@@ -27,8 +27,30 @@ steps
 1. web client
 
 dev steps
-1. learn dynamodb lobby#123 notation
+1. refresh on dynamodb, model lobby data structure
 1. setup local dynamodb
 1. setup db models
 1. write tests for models
 1. write functions api with tests
+
+# dynamodb
+
+Item Collection: group of items that share the same partition key value
+
+lobby table
+PK: lobby1234
+Attributes
+    - data: json
+        ```
+        {
+            "players": [{
+                "name": "dylan",
+                "avatar": "green-dragon"
+            },{
+                "name": "vicky",
+                "avatar": "blue-turtle"
+            }]
+        }
+        ```
+    - created-at: unix time
+    - updated-at: unix time
