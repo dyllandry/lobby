@@ -10,5 +10,8 @@
   "description": "",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.716.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
   }
 }
