@@ -1,0 +1,19 @@
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      # Aws's instructions for running dynamodb-local uses this volume notation
+      # I am unfamiliar with that creates the volume in the project's local
+      # directory.
+      # I tried instead using a named volume for this so it wouldn't be kept in
+      # the project's directory but ran into an error when running:
+      # aws dynamodb list-tables --endpoint-url http://localhost:8000
+      # The error: "unable to open database file"
+      # For now I'll stick with how they recommended to get this running until I have
+      # reason to change it.
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
