@@ -1,5 +1,18 @@
-import { DeleteItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import {
+  DeleteItemCommand,
+  GetItemCommand,
+  PutItemCommand,
+} from "@aws-sdk/client-dynamodb";
 import { dynamodbClient } from "./dynamodb-client";
+
+export const get = async (id: string) => {
+  const command = new GetItemCommand({
+    TableName: "lobby",
+    Key: { lobbyId: { S: id } },
+  });
+  const response = await dynamodbClient.send(command);
+  return response.Item;
+};
 
 export const create = async () => {
   const lobbyItem = {

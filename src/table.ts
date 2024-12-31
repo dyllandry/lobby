@@ -38,5 +38,5 @@ export const deleteTable = async () => {
 export const listTables = async () => {
   const command = new ListTablesCommand({});
   const response = await dynamodbClient.send(command);
-  return response;
+  return response.TableNames;
 };
