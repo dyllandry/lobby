@@ -1,56 +1,37 @@
-import {
-  DeleteItemCommand,
-  GetItemCommand,
-  PutItemCommand,
-} from "@aws-sdk/client-dynamodb";
-import { dynamodbClient } from "./dynamodb-client";
+import { dynamodbDocumentClient } from "./dynamodb-client";
+import { DeleteCommand, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 
 export const get = async (id: string) => {
-  const command = new GetItemCommand({
+  const getCommand = new GetCommand({
     TableName: "lobby",
-    Key: { lobbyId: { S: id } },
+    Key: { lobbyId: id },
   });
-  const response = await dynamodbClient.send(command);
+  const response = await dynamodbDocumentClient.send(getCommand);
   return response.Item;
 };
 
-export const create = async () => {
+export const put = async () => {
   const lobbyItem = {
-    lobbyId: {
-      S: createId(),
-    },
+    lobbyId: createId(),
     data: {
-      M: {
-        players: {
-          L: [],
-        },
-      },
+      players: [],
     },
-    createdAt: {
-      S: Date.now().toString(),
-    },
-    updatedAt: {
-      S: Date.now().toString(),
-    },
+    createdAt: Date.now().toString(),
+    updatedAt: Date.now().toString(),
   };
-  const command = new PutItemCommand({
-    TableName: "lobby",
-    Item: lobbyItem,
-  });
-  await dynamodbClient.send(command);
+  const createCommand = new PutCommand({ TableName: "lobby", Item: lobbyItem });
+  await dynamodbDocumentClient.send(createCommand);
   return lobbyItem;
 };
 
-export const deleteItem = async (id: string) => {
-  const command = new DeleteItemCommand({
+export const remove = async (id: string) => {
+  const command = new DeleteCommand({
     TableName: "lobby",
     Key: {
-      lobbyId: {
-        S: id,
-      },
+      lobbyId: id,
     },
   });
-  await dynamodbClient.send(command);
+  await dynamodbDocumentClient.send(command);
 };
 
 const createId = () => {
