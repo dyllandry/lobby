@@ -35,6 +35,10 @@ dev steps
 
 # dynamodb
 
+Links:
+- dynamodb high-level client docs @aws-sdk/lib-dynamodb: <https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-lib-dynamodb/>
+- dynamodb low-level client docs @aws-sdk/client-dynamodb: <https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/>
+
 Item Collection: group of items that share the same partition key value
 
 lobby table
@@ -56,3 +60,4 @@ Attributes
     - updated-at: unix time
 
 - [ ] add methods to add player to lobby and to update player (name and avatar)
+- [ ] add tests!

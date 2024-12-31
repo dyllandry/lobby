@@ -10,13 +10,13 @@ export const createTable = async () => {
     TableName: "lobby",
     AttributeDefinitions: [
       {
-        AttributeName: "lobbyId",
+        AttributeName: "id",
         AttributeType: "S",
       },
     ],
     KeySchema: [
       {
-        AttributeName: "lobbyId",
+        AttributeName: "id",
         KeyType: "HASH",
       },
     ],
