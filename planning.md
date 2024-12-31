@@ -54,3 +54,5 @@ Attributes
         ```
     - created-at: unix time
     - updated-at: unix time
+
+- [ ] add methods to add player to lobby and to update player (name and avatar)
