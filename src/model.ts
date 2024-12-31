@@ -1,16 +1,30 @@
 import { dynamodbDocumentClient } from "./dynamodb-client";
 import { DeleteCommand, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 
-export const get = async (id: string) => {
+type Lobby = {
+  lobbyId: string;
+  data: {
+    players: Player[];
+  };
+  createdAt: string;
+  updatedAt: string;
+};
+
+type Player = {
+  name: string;
+  avatar: string;
+};
+
+export const get = async (id: string): Promise<Lobby | null> => {
   const getCommand = new GetCommand({
     TableName: "lobby",
     Key: { lobbyId: id },
   });
   const response = await dynamodbDocumentClient.send(getCommand);
-  return response.Item;
+  return response.Item ? (response.Item as Lobby) : null;
 };
 
-export const put = async () => {
+export const put = async (): Promise<Lobby> => {
   const lobbyItem = {
     lobbyId: createId(),
     data: {
