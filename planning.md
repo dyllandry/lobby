@@ -54,3 +54,5 @@ Attributes
         ```
     - created-at: unix time
     - updated-at: unix time
+
+- [ ] Let's try using the highlevel api next to see if it abstracts away the marshaling with lobbyId: { S: "abc" } to just lobbyId: "abc"
